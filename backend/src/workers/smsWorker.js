@@ -12,8 +12,8 @@ const connection = {
 
 const smsWorker = new Worker(
     'smsQueue',
-    async (job) => {
-        await sendSMS(job.data.to, job.data.body);
+    async(job) => {
+      await sendSMS(job.data.to, job.data.message);
     },
     {
         connection,

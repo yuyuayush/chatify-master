@@ -1,8 +1,7 @@
 import React from "react";
-import {Link} from "react-router";
+import { Link } from "react-router";
 
-
-const SeatGrid = ({groupedSeats, selectedSeats, onSeatClick}) => {
+const SeatGrid = ({ groupedSeats, selectedSeats, onSeatClick }) => {
     const getSeatColor = (seat, selectedSeats) => {
         if (selectedSeats.includes(seat._id)) return "bg-green-500 text-white";
         if (seat.status === "BOOKED") return "bg-red-500 text-white";
@@ -33,20 +32,19 @@ const SeatGrid = ({groupedSeats, selectedSeats, onSeatClick}) => {
                             {groupedSeats[row]
                                 .sort((a, b) => a.column - b.column)
                                 .map((seat) => (
-                                    <button
-                                        onClick={() => onSeatClick(seat)}
-                                        disabled={seat.status === "BOOKED"}
-                                        className={`w-10 h-10 rounded-md font-semibold text-sm transition duration-150 ${getSeatColor(
-                                            seat,
-                                            selectedSeats
-                                        )}`}
-                                    >
-                                        {seat.seatNumber}
-                                    </button>
-                                    //         <Link key={`${seat._id}`} to={`${seat._id}`}>
-                                    //
-                                    //
-                                    // </Link>
+
+                                        <button key={`${seat._id}`}
+                                            onClick={() => onSeatClick(seat)}
+                                            disabled={seat.status === "BOOKED"}
+                                            className={`w-10 h-10 rounded-md font-semibold text-sm transition duration-150 ${getSeatColor(
+                                                seat,
+                                                selectedSeats
+                                            )}`}
+                                        >
+                                            {seat.seatNumber}
+                                        </button>
+                                   // <Link key={`${seat._id}`} to={`${seat._id}`}>
+                                   // </Link>
                                 ))}
                         </div>
                     </div>

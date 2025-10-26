@@ -70,6 +70,11 @@ const ticketEmailTemplates = [
         generateBody: generatePaymentEmailTemplate,
     },
     {
+        label: "Payment Successful",
+        generateSubject: (data) => `💰 Payment Successful for ${data.eventName}`,
+        generateBody: generatePaymentEmailTemplate,
+    },
+    {
         label: "Payment Failed",
         generateSubject: (data) => `⚠️ Payment Failed for ${data.eventName}`,
         generateBody: generatePaymentFailedTemplate,

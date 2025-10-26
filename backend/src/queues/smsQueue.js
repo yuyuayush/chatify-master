@@ -1,4 +1,3 @@
-// bull/smsQueue.js
 import { Queue } from 'bullmq';
 const {REDIS_HOST, REDIS_PORT, REDIS_PASSWORD, REDIS_USERNAME} = process.env;
 

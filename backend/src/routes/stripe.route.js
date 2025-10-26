@@ -5,4 +5,5 @@ const stripeRoute = express.Router();
 
 stripeRoute.post("/stripe", createPaymentIntent);
 
+
 export default stripeRoute;

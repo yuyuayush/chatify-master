@@ -34,34 +34,34 @@ export const createPaymentIntent = async (req, res) => {
 };
 
 
-export const stripeWebhook = async (req, res) => {
-  const sig = req.headers['stripe-signature'];
+// export const stripeWebhook = async (req, res) => {
+//   const sig = req.headers['stripe-signature'];
 
-  let event;
+//   let event;
 
-  try {
-    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-  } catch (err) {
-    console.error("Webhook Error:", err.message);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
-  }
+//   try {
+//     event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+//   } catch (err) {
+//     console.error("Webhook Error:", err.message);
+//     return res.status(400).send(`Webhook Error: ${err.message}`);
+//   }
 
-  // Handle event types
-  switch (event.type) {
-    case 'payment_intent.succeeded':
-      const paymentIntent = event.data.object;
-      console.log("PaymentIntent was successful!", paymentIntent.id);
-      break;
+//   // Handle event types
+//   switch (event.type) {
+//     case 'payment_intent.succeeded':
+//       const paymentIntent = event.data.object;
+//       console.log("PaymentIntent was successful!", paymentIntent.id);
+//       break;
 
-    case 'checkout.session.completed':
-      const session = event.data.object;
-      console.log("Checkout session completed!", session.id);
-      break;
+//     case 'checkout.session.completed':
+//       const session = event.data.object;
+//       console.log("Checkout session completed!", session.id);
+//       break;
 
-    default:
-      console.log(`Unhandled event type: ${event.type}`);
-  }
+//     default:
+//       console.log(`Unhandled event type: ${event.type}`);
+//   }
 
-  // Acknowledge receipt
-  res.status(200).send({ received: true });
-};
+//   // Acknowledge receipt
+//   res.status(200).send({ received: true });
+// };

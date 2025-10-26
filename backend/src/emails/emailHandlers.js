@@ -1,5 +1,6 @@
 import { resendClient, sender } from "../lib/resend.js";
 import { createWelcomeEmailTemplate } from "../emails/emailTemplates.js";
+import addEmailToQueue from "../queues/emailQueue.js";
 
 export const sendWelcomeEmail = async (email, name, clientURL) => {
   const { data, error } = await resendClient.emails.send({
@@ -21,6 +22,15 @@ export const sendWelcomeEmailHandler = async (data) => {
   await addEmailToQueue({
     email: data.email,
     type: "Welcome Confirmation",
+    userName: data.fullName
+  })
+
+
+}
+export const sendPaymentSuccessfull = async (data) => {
+  await addEmailToQueue({
+    email: data.email,
+    type: "Payment Successful",
     userName: data.fullName
   })
 

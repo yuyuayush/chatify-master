@@ -5,7 +5,7 @@ export default function PaymentSuccess() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 text-gray-800 p-6">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 text-gray-800 p-6">
       <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center animate-fadeIn">
         <div className="flex justify-center mb-6">
           <CheckCircleIcon className="w-20 h-20 text-green-500 animate-bounce" />

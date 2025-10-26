@@ -46,6 +46,14 @@ const redisHandler = {
       return false;
     }
   },
+
+  async delAllKey(){
+    try{
+       await redisClient.flushall();
+    }catch(error){
+      console.error("Error deleting all keys:", error);
+    }
+  }
 };
 
 export default redisHandler;

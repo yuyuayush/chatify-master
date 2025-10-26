@@ -39,7 +39,7 @@ function App() {
         <Route path="/movies/:id" element={<MovieDetail />} />
         <Route path="/movies/:id/seat-selector" element={<BookingSeatPage />} />
         <Route path="/movies/:showId/seat-selector/:seatId" element={<SeatConfirmPage />} />
-        <Route path="/success" element={<PaymentSuccess />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
       </Routes>
 
       <Toaster />

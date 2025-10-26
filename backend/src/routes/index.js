@@ -2,11 +2,13 @@ import { Router } from 'express'
 import seatRoute from './seat.route.js';
 import movieRoute from './movie.route.js';
 import { esClient } from '../config/elastic.js';
+import webhookRoute from './webhook.route.js';
 
 const router = Router();
 
 router.use("/movies", movieRoute)
 router.use("/seat", seatRoute)
+router.post("/webhook", webhookRoute);
 router.get("/search", async (req, res) => {
     const query = req.query.q;
     if (!query) return res.json([]);

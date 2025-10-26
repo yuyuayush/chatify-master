@@ -24,29 +24,8 @@ const SeatSelector = ({ showId }) => {
     // Handle seat click locally
     const handleSeatClick = (seat) => {
         if (seat.status !== "AVAILABLE") return;
+        setSelectedSeats((prev) => selectedSeats.includes(seat._id) ? [...prev.filter((s) => s !== seat._id)] : [...prev, seat._id]);
 
-        // Optimistically mark as RESERVED locally
-        setSeats((prev) =>
-            prev.map((s) =>
-                s._id === seat._id ? { ...s, status: "RESERVED" } : s
-            )
-        );
-
-        setSelectedSeats((prev) => [...prev, seat._id]);
-
-        // Send lock request to backend
-        axiosInstance.post("/seat/lock", {
-            showId,
-            seatIds: [seat._id],
-        }).catch(() => {
-            // rollback if backend fails
-            setSeats((prev) =>
-                prev.map((s) =>
-                    s._id === seat._id ? { ...s, status: "AVAILABLE" } : s
-                )
-            );
-            setSelectedSeats((prev) => prev.filter((id) => id !== seat._id));
-        });
     };
 
     // Confirm seats by calling backend to lock
@@ -56,18 +35,26 @@ const SeatSelector = ({ showId }) => {
         }
 
         try {
-            const res = await axiosInstance.post("/seat/lock", {
+            await axiosInstance.post("/seat/lock", {
                 showId,
                 seatIds: selectedSeats,
             });
 
-            toast.success("Seats locked successfully");
-            setSeats(res.data?.data?.seats || seats);
-            setSelectedSeats([]); // reset selection after booking
+            const stripeData = await axiosInstance.post("/messages/stripe", {
+                amount: 399,
+                productName: "seat",
+            });
+
+            // console.log(stripeData.data.data.url);
+            window.location.href = stripeData.data.url; // check backend response key
+
+            setSelectedSeats([]); // reset selection (optional, page will redirect)
         } catch (error) {
+            console.log(error);
             toast.error(error.response?.data?.message || "Failed to lock seats");
         }
     };
+
 
     // Subscribe to real-time updates
     useEffect(() => {
