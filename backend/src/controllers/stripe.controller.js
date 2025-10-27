@@ -4,6 +4,7 @@ const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET; // store in .env
 export const createPaymentIntent = async (req, res) => {
   try {
     const { amount, currency, productName } = req.body;
+    console.log(amount);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -12,6 +13,7 @@ export const createPaymentIntent = async (req, res) => {
           price_data: {
             currency: "usd",
             product_data: {
+              amount,
               name: productName || "Sample Product", // required field
             },
             unit_amount: Math.round(amount * 100), // convert to smallest unit

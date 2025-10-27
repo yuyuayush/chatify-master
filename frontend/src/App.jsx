@@ -31,11 +31,11 @@ function App() {
       <div className="absolute bottom-0 -right-4 size-96 bg-cyan-500 opacity-20 blur-[100px]" /> */}
 
       <Routes>
-        <Route path="/" element={authUser ? <ChatPage /> : <Navigate to={"/login"} />} />
+        {/* <Route path="/" element={authUser ? <ChatPage /> : <Navigate to={"/login"} />} /> */}
         <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to={"/"} />} />
         <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to={"/"} />} />
 
-        <Route path="/movies" element={<MovieList />} />
+        <Route path="/" element={<MovieList />} />
         <Route path="/movies/:id" element={<MovieDetail />} />
         <Route path="/movies/:id/seat-selector" element={<BookingSeatPage />} />
         <Route path="/movies/:showId/seat-selector/:seatId" element={<SeatConfirmPage />} />

@@ -41,8 +41,10 @@ const SeatSelector = ({ showId }) => {
             });
 
             const stripeData = await axiosInstance.post("/messages/stripe", {
-                amount: 399,
-                productName: "seat",
+                amount: 1,
+                productName: `${showId}-Movie Ticket"`,
+                quantity: selectedSeats.length,
+
             });
 
             // console.log(stripeData.data.data.url);
